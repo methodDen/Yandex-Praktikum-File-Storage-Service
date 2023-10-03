@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class AppSettings(BaseSettings):
     app_title: str = "File Storage"
     project_host: str = "127.0.0.1"
-    project_port: int = 8080
+    project_port: int = 8000
     log_database: bool = True
     database_dsn: str
 
