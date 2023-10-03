@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-router = APIRouter()
+router = APIRouter(tags=['Health Check'])
 
 
-@router.post('/ping')
+@router.post('/ping/')
 async def ping():
     pass
