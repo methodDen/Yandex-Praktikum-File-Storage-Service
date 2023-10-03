@@ -18,7 +18,7 @@ class AppSettings(BaseSettings):
     database_dsn: str
 
     class Config:
-        env_file = ".env.example"
+        env_file = ".env"
         env_file_encoding = "utf-8"
 
 
