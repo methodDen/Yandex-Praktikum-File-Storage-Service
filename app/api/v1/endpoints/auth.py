@@ -9,7 +9,9 @@ from app.crud.user import user
 from app.db.db import get_session
 from app.schemas.user import (
     UserRegisterRequestSchema,
-    UserRegisterResponseSchema, AccessTokenResponse, UserLoginRequestSchema,
+    UserRegisterResponseSchema,
+    AccessTokenResponse,
+    UserLoginRequestSchema,
 )
 from app.services.auth import authenticate_user, create_access_token
 
