@@ -9,7 +9,7 @@ from typing import (
 
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select
-from src.db.base_class import Base
+from app.db.base_class import Base
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
 

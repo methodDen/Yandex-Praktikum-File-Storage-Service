@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from src.api.v1.endpoints import (
+from app.api.v1.endpoints import (
     health_check,
     file,
     auth,

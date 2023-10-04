@@ -30,12 +30,6 @@ RUN poetry run pip install -U pip && poetry install
 
 COPY ./ ./
 
-COPY entrypoint.sh ./
-
-RUN chmod +x './entrypoint.sh'
-
 EXPOSE 8000
 
 ENV PYTHONPATH "${PYTHONPATH}:/src"
-
-CMD ["./entrypoint.sh"]
