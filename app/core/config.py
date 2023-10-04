@@ -16,6 +16,9 @@ class AppSettings(BaseSettings):
     project_port: int = 8000
     log_database: bool = True
     database_dsn: str
+    token_expire_minutes: int = 30
+    secret_key: str
+    algorithm: str = "HS256"
 
     class Config:
         env_file = ".env"

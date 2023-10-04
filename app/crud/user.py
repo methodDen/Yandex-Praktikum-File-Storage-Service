@@ -8,7 +8,7 @@ from app.schemas.user import (
     UserCreateSchema,
     UserUpdateSchema,
 )
-from app.services.auth import get_password_hash
+from app.services.password import get_password_hash
 
 
 class CRUDUser(CRUDBase[User, UserCreateSchema, UserUpdateSchema]):

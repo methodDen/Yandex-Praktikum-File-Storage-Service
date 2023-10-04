@@ -7,8 +7,7 @@ class UserBaseSchema(BaseModel):
 
 
 class UserCreateSchema(UserBaseSchema):
-    username: str = Field(..., min_length=4, max_length=50)
-    password: str = Field(..., min_length=8, max_length=50)
+    pass
 
 
 class UserUpdateSchema(UserBaseSchema):
@@ -16,8 +15,18 @@ class UserUpdateSchema(UserBaseSchema):
 
 
 class UserRegisterRequestSchema(UserBaseSchema):
-    pass
+    username: str = Field(..., min_length=4, max_length=50)
+    password: str = Field(..., min_length=8, max_length=50)
+
+
+class UserLoginRequestSchema(UserBaseSchema):
+    username: str = Field(..., min_length=4, max_length=50)
+    password: str = Field(..., min_length=8, max_length=50)
 
 
 class UserRegisterResponseSchema(UserBaseSchema):
     pass
+
+
+class AccessTokenResponse(BaseModel):
+    access_token: str
