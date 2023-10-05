@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
@@ -40,17 +41,16 @@ async def register(
 
 
 @router.post(
-    '/login/',
+    '/token/',
     response_model=AccessTokenResponse,
-    status_code=status.HTTP_200_OK,
-    description='Get access token',
+    description='Get access token for user',
 )
-async def authentication(
-    *,
-    db: AsyncSession = Depends(get_session),
-    user_in: UserLoginRequestSchema,
+async def login_ui_for_access_token(
+        *,
+        db: AsyncSession = Depends(get_session),
+        form_data: OAuth2PasswordRequestForm = Depends()
 ):
-    username, password = user_in.username, user_in.password
+    username, password = form_data.username, form_data.password
     user_object = await authenticate_user(db, username, password)
     if not user_object:
         raise HTTPException(

@@ -30,3 +30,11 @@ class UserRegisterResponseSchema(UserBaseSchema):
 
 class AccessTokenResponse(BaseModel):
     access_token: str
+
+
+class UserTokenData(BaseModel):
+    username: str = None
+
+
+class CurrentUserSchema(BaseModel):
+    username: str

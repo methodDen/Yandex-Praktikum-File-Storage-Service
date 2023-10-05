@@ -10,6 +10,7 @@ app = FastAPI(
     docs_url="/api/openapi",
     openapi_url="/api/openapi.json",
     default_response_class=ORJSONResponse,
+    swagger_ui_oauth2_redirect_url="/auth/login/",
 )
 
 app.include_router(base.base_router, prefix="/api/v1")

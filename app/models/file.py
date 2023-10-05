@@ -1,4 +1,10 @@
-from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy import (
+    Column,
+    String,
+    Integer,
+    ForeignKey,
+    Boolean,
+)
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
@@ -12,11 +18,15 @@ class File(
     __tablename__ = "file"
     user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), nullable=False,)
     user = relationship("User", back_populates="files")
+    name = Column(String(255), nullable=False)
+    path = Column(String(255), nullable=False, unique=True)
+    size = Column(Integer, nullable=False)
+    is_downloadable = Column(Boolean, default=True)
 
     def __repr__(self):
         return (
-            "<User(username='%s')>"
+            "<File(file_name='%s')>"
             % (
-                self.username,
+                self.name,
             )
         )
