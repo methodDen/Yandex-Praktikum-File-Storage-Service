@@ -12,7 +12,6 @@ from app.schemas.user import (
     UserRegisterRequestSchema,
     UserRegisterResponseSchema,
     AccessTokenResponse,
-    UserLoginRequestSchema,
 )
 from app.services.auth import authenticate_user, create_access_token
 
@@ -20,7 +19,7 @@ router = APIRouter(tags=['Auth'])
 
 
 @router.post(
-    '/register/',
+    '/register',
     response_model=UserRegisterResponseSchema,
     status_code=status.HTTP_201_CREATED,
     description='User registration',
@@ -41,14 +40,14 @@ async def register(
 
 
 @router.post(
-    '/token/',
+    '/token',
     response_model=AccessTokenResponse,
     description='Get access token for user',
 )
-async def login_ui_for_access_token(
-        *,
-        db: AsyncSession = Depends(get_session),
-        form_data: OAuth2PasswordRequestForm = Depends()
+async def get_access_token(
+    *,
+    db: AsyncSession = Depends(get_session),
+    form_data: OAuth2PasswordRequestForm = Depends()
 ):
     username, password = form_data.username, form_data.password
     user_object = await authenticate_user(db, username, password)

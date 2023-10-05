@@ -62,15 +62,3 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         await db.commit()
         await db.refresh(db_obj)
         return db_obj
-
-    async def create_multi(self, db: AsyncSession, *, obj_in: CreateSchemaType) -> List[ModelType]:
-        """
-        Create multiple rows in the database
-        """
-        obj_in_data = jsonable_encoder(obj_in)
-        db_objs = [self.model(**obj_in_data) for obj_in_data in obj_in_data]
-        db.add_all(db_objs)
-        await db.commit()
-        for db_obj in db_objs:
-            await db.refresh(db_obj)
-        return db_objs

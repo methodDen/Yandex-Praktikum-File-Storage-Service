@@ -22,3 +22,8 @@ class FileUpdateSchema(FileBaseSchema):
 class FileResponseSchema(FileBaseSchema):
     id: int
     created_at: datetime
+
+
+class FileListResponseSchema(BaseModel):
+    account_id: int
+    files: list[FileResponseSchema]

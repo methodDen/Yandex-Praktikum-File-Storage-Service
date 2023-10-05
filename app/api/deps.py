@@ -11,7 +11,7 @@ from app.db.db import get_session
 from app.schemas.user import UserTokenData
 
 reuseable_oauth2 = OAuth2PasswordBearer(
-    tokenUrl="v1/auth/token/",
+    tokenUrl="v1/auth/token",
 )
 
 

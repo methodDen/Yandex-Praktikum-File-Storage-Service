@@ -1,4 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException,
+)
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 from starlette.responses import JSONResponse
@@ -10,7 +14,7 @@ from app.services.health_check import ping_database
 router = APIRouter(tags=['Health Check'])
 
 
-@router.post('/ping/', response_model=MessageResponseSchema, status_code=status.HTTP_200_OK)
+@router.post('/ping', response_model=MessageResponseSchema, status_code=status.HTTP_200_OK)
 async def check_db_health(
     *,
     db: AsyncSession = Depends(get_session),
