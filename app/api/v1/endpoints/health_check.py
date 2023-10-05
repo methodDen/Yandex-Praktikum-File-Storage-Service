@@ -14,7 +14,7 @@ from app.services.health_check import ping_database
 router = APIRouter(tags=['Health Check'])
 
 
-@router.post('/ping', response_model=MessageResponseSchema, status_code=status.HTTP_200_OK)
+@router.get('/ping', response_model=MessageResponseSchema, status_code=status.HTTP_200_OK)
 async def check_db_health(
     *,
     db: AsyncSession = Depends(get_session),
