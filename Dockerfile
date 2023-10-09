@@ -19,6 +19,7 @@ RUN apt-get update && apt-get upgrade -y \
     libsm6 \
     libxext6 \
     curl \
+    netcat \
     && curl -sSL 'https://install.python-poetry.org' | python - \
     && poetry --version
 
@@ -33,3 +34,7 @@ COPY ./ ./
 EXPOSE 8000
 
 ENV PYTHONPATH "${PYTHONPATH}:/src"
+
+RUN chmod +x './init.sh'
+
+ENTRYPOINT ["bash", "./init.sh"]

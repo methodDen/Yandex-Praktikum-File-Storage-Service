@@ -31,7 +31,7 @@ class AccessTokenResponse(BaseModel):
 
 
 class UserTokenData(BaseModel):
-    username: str = None
+    username: str | None = None
 
 
 class CurrentUserSchema(BaseModel):

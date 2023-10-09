@@ -23,7 +23,6 @@ class CRUDUser(CRUDBase[User, UserCreateSchema, UserUpdateSchema]):
         db_obj = self.model(**obj_in_data)
         db.add(db_obj)
         await db.commit()
-        await db.refresh(db_obj)
         return db_obj
 
     async def get_by_username(self, db: AsyncSession, *, username: str) -> User:

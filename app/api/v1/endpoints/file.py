@@ -1,4 +1,5 @@
 import os.path
+from typing import Annotated
 
 from fastapi import (
     APIRouter,
@@ -58,12 +59,14 @@ async def upload_file(
     description='Get files list data of current user',
 )
 async def get_files_data(
+    *,
     db: AsyncSession = Depends(get_session),
     current_user: CurrentUserSchema = Depends(get_current_user),
+    max_results: Annotated[int, Query(description="Pagination page size", ge=1)] = 10,
+    offset: Annotated[int, Query(description="Pagination page offset", ge=0)] = 0,
 ):
-    files = await file.get_file_list_by_user_id(db=db, user_id=current_user.id)
+    files = await file.get_file_list_by_user_id(db=db, user_id=current_user.id, skip=offset, limit=max_results)
     return {
-        'account_id': current_user.id,
         'files': files
     }
 
@@ -74,7 +77,6 @@ async def download_file(
     db: AsyncSession = Depends(get_session),
     current_user: CurrentUserSchema = Depends(get_current_user),
 ):
-    print(current_user)
     if path.find('/') != -1:
         file_object = await file.get_file_by_path(
             db=db,
@@ -97,7 +99,13 @@ async def download_file(
     if not file_object.is_downloadable:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail='You can not download this file.'
+            detail='You can not download this file'
+        )
+
+    if not os.path.isfile(file_object.path):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail='File path is not reachable on server'
         )
 
     return FileResponse(

@@ -25,5 +25,4 @@ class FileResponseSchema(FileBaseSchema):
 
 
 class FileListResponseSchema(BaseModel):
-    account_id: int
     files: list[FileResponseSchema]
