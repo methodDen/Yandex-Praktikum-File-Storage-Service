@@ -47,8 +47,8 @@ class CRUDFile(CRUDBase[File, FileCreateSchema, FileUpdateSchema]):
         file_object = await db.execute(query)
         return file_object.scalar_one_or_none()
 
-    async def get_file_list_by_user_id(self, db: AsyncSession, user_id: int):
-        query = select(self.model).where(self.model.user_id == user_id)
+    async def get_file_list_by_user_id(self, db: AsyncSession, user_id: int, skip: int = 0, limit: int = 0,):
+        query = select(self.model).where(self.model.user_id == user_id).offset(skip).limit(limit)
         file_list = await db.execute(query)
         return file_list.scalars().all()
 

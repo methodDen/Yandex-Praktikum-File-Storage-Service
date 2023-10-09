@@ -322,3 +322,5 @@
 4. Запустите проект командой `docker-compose up --build -d`
 5. Приложение будет доступно по адресу `http://localhost:80/api/openapi/"
 6. Для запуска тестов выполните команду `docker-compose exec backend pytest`
+
+Для запуска проекта в продакшн среде выполните команду `docker-compose -f docker-compose.prod.yml up --build -d`
